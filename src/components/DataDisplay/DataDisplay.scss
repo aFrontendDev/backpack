@@ -1,0 +1,95 @@
+@use 'sass:color';
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.data-section {
+  background: $bg-white;
+  padding: rem($spacing-xl);
+  border-radius: rem($radius-md);
+  margin-bottom: rem($spacing-xl);
+  box-shadow: 0 2px 4px $shadow-color;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: rem($spacing-lg);
+    color: $text-color;
+  }
+}
+
+button {
+  padding: rem($spacing-sm) rem($spacing-lg);
+  background-color: $primary-color;
+  color: $text-color-white;
+  border: none;
+  border-radius: rem($radius-sm);
+  font-size: rem($font-size-base);
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -5%);
+  }
+
+  &:disabled {
+    background-color: $bg-disabled;
+    cursor: not-allowed;
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: color.adjust($secondary-color, $lightness: -5%);
+    }
+  }
+}
+
+.data-display {
+  margin-top: rem($spacing-lg);
+}
+
+.data-item {
+  background: $bg-muted;
+  border: 1px solid $border-color;
+  border-radius: rem($radius-sm);
+  padding: rem($spacing-md);
+  margin-bottom: rem($spacing-md);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: rem($spacing-xs);
+    color: $text-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  pre {
+    background: $bg-white;
+    padding: rem($spacing-sm);
+    border-radius: rem($radius-sm);
+    overflow-x: auto;
+    margin: 0;
+    font-size: rem($font-size-sm);
+  }
+}
+
+.delete-btn {
+  padding: rem($spacing-xs) rem($spacing-md);
+  font-size: rem($font-size-sm);
+  background-color: $danger-color;
+
+  &:hover {
+    background-color: color.adjust($danger-color, $lightness: -5%);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  color: $text-color-light;
+  padding: rem($spacing-xl);
+
+  &.error {
+    color: $msg-error-text;
+  }
+}

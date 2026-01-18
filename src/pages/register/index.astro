@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Card } from '../../components/Card';
+import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import './_register.scss';
+---
+
+<Layout title="Register">
+  <main class="auth-page">
+    <Card className="auth-card">
+      <h1 class="text-center">Register</h1>
+
+      <RegisterForm client:load />
+
+      <p class="text-center">
+        Already have an account? <a href="/login">Login here</a>
+      </p>
+    </Card>
+  </main>
+</Layout>

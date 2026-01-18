@@ -1,16 +1,64 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { Card } from '../components/Card';
+import { Button } from '../components/Button';
+import './_index.scss';
 
+const user = Astro.locals.user;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Backpack App">
+  <main class="home-page">
+    <Card>
+      <h1 class="text-center">Welcome to Backpack App</h1>
+
+      {user ? (
+        <div class="user-info">
+          <p>Logged in as: <strong>{user.username}</strong></p>
+          <div class="actions">
+            <a href="/dashboard" class="button-link">
+              <Button variant="primary">Dashboard</Button>
+            </a>
+            <form id="logout-form" method="POST" action="/api/auth/logout">
+              <Button type="submit">Logout</Button>
+            </form>
+          </div>
+        </div>
+      ) : (
+        <div class="auth-links">
+          <p>Please log in or register to continue</p>
+          <div class="actions">
+            <a href="/login" class="button-link">
+              <Button variant="primary">Login</Button>
+            </a>
+            <a href="/register" class="button-link">
+              <Button variant="secondary">Register</Button>
+            </a>
+          </div>
+        </div>
+      )}
+    </Card>
+  </main>
+
+  <script>
+    const logoutForm = document.getElementById('logout-form');
+
+    if (logoutForm) {
+      logoutForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        try {
+          const response = await fetch('/api/auth/logout', {
+            method: 'POST'
+          });
+
+          if (response.ok) {
+            window.location.href = '/';
+          }
+        } catch (error) {
+          console.error('Logout failed:', error);
+        }
+      });
+    }
+  </script>
+</Layout>

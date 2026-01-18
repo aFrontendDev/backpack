@@ -1,0 +1,73 @@
+// Import functions
+@use 'functions' as *;
+
+// Colors - Brand
+$primary-color: #4CAF50;
+$secondary-color: #008CBA;
+$danger-color: #f44336;
+
+// Colors - Text
+$text-color: #333333;
+$text-color-light: #666666;
+$text-color-white: #ffffff;
+$text-color-disabled: #cccccc;
+
+// Colors - Backgrounds
+$bg-white: #ffffff;
+$bg-body: #f5f5f5;
+$bg-muted: #f9f9f9;
+$bg-disabled: #cccccc;
+
+// Colors - Borders
+$border-color: #dddddd;
+$border-color-light: #e0e0e0;
+
+// Colors - Shadows
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+// Colors - Message/Alert variants
+// Error
+$msg-error-bg: #f8d7da;
+$msg-error-text: #721c24;
+$msg-error-border: #f5c6cb;
+
+// Success
+$msg-success-bg: #d4edda;
+$msg-success-text: #155724;
+$msg-success-border: #c3e6cb;
+
+// Info
+$msg-info-bg: #d1ecf1;
+$msg-info-text: #0c5460;
+$msg-info-border: #bee5eb;
+
+// Warning
+$msg-warning-bg: #fff3cd;
+$msg-warning-text: #856404;
+$msg-warning-border: #ffeaa7;
+
+// Spacing (use with rem() function)
+$spacing-xs: 8;   // rem(8) = 0.5rem
+$spacing-sm: 12;  // rem(12) = 0.75rem
+$spacing-md: 16;  // rem(16) = 1rem
+$spacing-lg: 24;  // rem(24) = 1.5rem
+$spacing-xl: 32;  // rem(32) = 2rem
+
+// Typography
+$font-family: sans-serif;
+$font-size-sm: 14;   // rem(14) = 0.875rem
+$font-size-base: 16; // rem(16) = 1rem
+$font-size-lg: 18;   // rem(18) = 1.125rem
+$font-size-xl: 24;   // rem(24) = 1.5rem
+$font-size-2xl: 32;  // rem(32) = 2rem
+
+// Border radius
+$radius-sm: 4;  // rem(4) = 0.25rem
+$radius-md: 8;  // rem(8) = 0.5rem
+$radius-lg: 12; // rem(12) = 0.75rem
+
+// Breakpoints (in px for media queries)
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;

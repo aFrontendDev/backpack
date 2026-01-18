@@ -1,0 +1,55 @@
+@use 'sass:color';
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.button {
+  padding: rem(12) rem(24);  // Instead of 0.75rem 1.5rem
+  border: none;
+  border-radius: rem($radius-sm);
+  font-size: rem($font-size-base);
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(8);
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease;
+
+  &:disabled {
+    background-color: $bg-disabled;
+    cursor: not-allowed;
+  }
+
+  &.primary {
+    background-color: $primary-color;
+    color: $text-color-white;
+
+    &:hover:not(:disabled) {
+      background-color: color.adjust($primary-color, $lightness: -5%);
+    }
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+    color: $text-color-white;
+
+    &:hover:not(:disabled) {
+      background-color: color.adjust($secondary-color, $lightness: -5%);
+    }
+  }
+
+  &.danger {
+    background-color: $danger-color;
+    color: $text-color-white;
+
+    &:hover:not(:disabled) {
+      background-color: color.adjust($danger-color, $lightness: -5%);
+    }
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+}

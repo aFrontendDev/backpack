@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Dashboard from '../../components/Dashboard/Dashboard';
+import './_dashboard.scss';
+
+const user = Astro.locals.user;
+
+if (!user) {
+  return Astro.redirect('/login');
+}
+---
+
+<Layout title="Dashboard">
+  <main>
+    <div class="header">
+      <h1>Dashboard</h1>
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+
+    <div class="user-info">
+      <p>Welcome, <strong>{user.username}</strong>!</p>
+    </div>
+
+    <Dashboard client:load />
+  </main>
+</Layout>

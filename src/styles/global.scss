@@ -1,0 +1,65 @@
+@use 'functions' as *;
+@use 'variables' as *;
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base Styles */
+html {
+  font-family: $font-family;
+  background: $bg-body;
+  color: $text-color;
+  line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: $text-color;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: rem($font-size-2xl);
+  margin-bottom: rem($spacing-md);
+}
+
+h2 {
+  font-size: rem($font-size-xl);
+  margin-bottom: rem($spacing-sm);
+}
+
+h3 {
+  font-size: rem(20);
+  margin-bottom: rem($spacing-xs);
+}
+
+/* Links */
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Layout Utilities */
+.container {
+  max-width: rem(1200);
+  margin: 0 auto;
+  padding: 0 rem($spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}

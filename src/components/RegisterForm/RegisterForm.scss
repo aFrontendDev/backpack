@@ -1,0 +1,76 @@
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.form-group {
+  margin-bottom: rem($spacing-lg);
+
+  label {
+    display: block;
+    margin-bottom: rem($spacing-xs);
+    font-weight: bold;
+    color: $text-color;
+
+    .required {
+      color: $danger-color;
+    }
+  }
+
+  .hint {
+    display: block;
+    margin-top: rem($spacing-xs);
+    font-size: rem($font-size-sm);
+    color: $text-color-light;
+  }
+}
+
+input {
+  width: 100%;
+  padding: rem($spacing-sm);
+  border: 1px solid $border-color;
+  border-radius: rem($radius-sm);
+  font-size: rem($font-size-base);
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.message {
+  margin-top: rem($spacing-md);
+  padding: rem($spacing-sm);
+  border-radius: rem($radius-sm);
+  text-align: center;
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+
+  &.error {
+    background-color: $msg-error-bg;
+    color: $msg-error-text;
+    border: 1px solid $msg-error-border;
+  }
+
+  &.success {
+    background-color: $msg-success-bg;
+    color: $msg-success-text;
+    border: 1px solid $msg-success-border;
+  }
+
+  &.info {
+    background-color: $msg-info-bg;
+    color: $msg-info-text;
+    border: 1px solid $msg-info-border;
+  }
+
+  &.warning {
+    background-color: $msg-warning-bg;
+    color: $msg-warning-text;
+    border: 1px solid $msg-warning-border;
+  }
+}

@@ -1,0 +1,27 @@
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.input {
+  width: 100%;
+  padding: rem($spacing-sm);
+  border: 1px solid $border-color;
+  border-radius: rem($radius-sm);
+  font-size: rem($font-size-base);
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+
+  &:disabled {
+    background-color: $bg-body;
+    cursor: not-allowed;
+  }
+
+  &.error {
+    border-color: $danger-color;
+  }
+}

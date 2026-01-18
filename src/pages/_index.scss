@@ -1,0 +1,38 @@
+@use '../styles/functions' as *;
+@use '../styles/variables' as *;
+
+.home-page {
+  max-width: rem(600);
+  margin: rem($spacing-xl) auto;
+  padding: 0 rem($spacing-md);
+}
+
+.user-info,
+.auth-links {
+  text-align: center;
+}
+
+.user-info p {
+  font-size: rem(18);
+  margin-bottom: rem($spacing-lg);
+}
+
+.auth-links p {
+  color: $text-color-light;
+  margin-bottom: rem($spacing-lg);
+}
+
+.actions {
+  display: flex;
+  gap: rem($spacing-md);
+  justify-content: center;
+  align-items: center;
+}
+
+.button-link {
+  text-decoration: none;
+}
+
+#logout-form {
+  margin: 0;
+}

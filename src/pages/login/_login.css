@@ -1,0 +1,9 @@
+.auth-page {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.auth-card {
+  width: 100%;
+}

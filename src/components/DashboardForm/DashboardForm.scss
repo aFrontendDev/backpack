@@ -1,0 +1,100 @@
+@use 'sass:color';
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.data-section {
+  background: $bg-white;
+  padding: rem($spacing-xl);
+  border-radius: rem($radius-md);
+  margin-bottom: rem($spacing-xl);
+  box-shadow: 0 2px 4px $shadow-color;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: rem($spacing-lg);
+    color: $text-color;
+  }
+}
+
+.form-group {
+  margin-bottom: rem($spacing-lg);
+
+  label {
+    display: block;
+    margin-bottom: rem($spacing-xs);
+    font-weight: bold;
+    color: $text-color;
+  }
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: rem($spacing-sm);
+  border: 1px solid $border-color;
+  border-radius: rem($radius-sm);
+  font-size: rem($font-size-base);
+  font-family: inherit;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+textarea {
+  font-family: 'Courier New', monospace;
+  resize: vertical;
+}
+
+button {
+  padding: rem($spacing-sm) rem($spacing-lg);
+  background-color: $primary-color;
+  color: $text-color-white;
+  border: none;
+  border-radius: rem($radius-sm);
+  font-size: rem($font-size-base);
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -5%);
+  }
+
+  &:disabled {
+    background-color: $bg-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.message {
+  margin-top: rem($spacing-md);
+  padding: rem($spacing-sm);
+  border-radius: rem($radius-sm);
+  text-align: center;
+
+  &.error {
+    background-color: $msg-error-bg;
+    color: $msg-error-text;
+    border: 1px solid $msg-error-border;
+  }
+
+  &.success {
+    background-color: $msg-success-bg;
+    color: $msg-success-text;
+    border: 1px solid $msg-success-border;
+  }
+
+  &.info {
+    background-color: $msg-info-bg;
+    color: $msg-info-text;
+    border: 1px solid $msg-info-border;
+  }
+
+  &.warning {
+    background-color: $msg-warning-bg;
+    color: $msg-warning-text;
+    border: 1px solid $msg-warning-border;
+  }
+}

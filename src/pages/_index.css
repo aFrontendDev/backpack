@@ -1,0 +1,33 @@
+.home-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.user-info,
+.auth-links {
+  text-align: center;
+}
+
+.user-info p {
+  font-size: 1.1rem;
+}
+
+.auth-links p {
+  color: #666;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-link {
+  text-decoration: none;
+}
+
+#logout-form {
+  margin: 0;
+}

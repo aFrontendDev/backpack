@@ -1,0 +1,33 @@
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.form-group {
+  margin-bottom: rem($spacing-lg);
+
+  label {
+    display: block;
+    margin-bottom: rem($spacing-xs);
+    font-weight: bold;
+    color: $text-color;
+
+    &.required::after {
+      content: ' *';
+      color: $danger-color;
+    }
+  }
+
+  .hint {
+    display: block;
+    margin-top: rem(4);
+    color: $text-color-light;
+    font-size: rem($font-size-sm);
+  }
+
+  .error-message {
+    display: block;
+    margin-top: rem(4);
+    color: $danger-color;
+    font-size: rem($font-size-sm);
+    font-weight: 500;
+  }
+}

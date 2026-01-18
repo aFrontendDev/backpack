@@ -1,0 +1,20 @@
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.card {
+  background: $bg-white;
+  border-radius: rem($radius-md);
+  box-shadow: 0 2px 8px $shadow-color;
+
+  &.padding-small {
+    padding: rem($spacing-md);
+  }
+
+  &.padding-medium {
+    padding: rem($spacing-xl);
+  }
+
+  &.padding-large {
+    padding: rem(48);
+  }
+}

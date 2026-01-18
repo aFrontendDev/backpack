@@ -1,0 +1,37 @@
+@use '../../styles/functions' as *;
+@use '../../styles/variables' as *;
+
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: $text-color-white $text-color-white $text-color-white transparent;
+  animation: spinner-rotate 0.6s linear infinite;
+
+  &.spinner-small {
+    width: rem(16);
+    height: rem(16);
+    border-width: 2px;
+  }
+
+  &.spinner-medium {
+    width: rem(20);
+    height: rem(20);
+    border-width: 3px;
+  }
+
+  &.spinner-large {
+    width: rem(24);
+    height: rem(24);
+    border-width: 3px;
+  }
+}
+
+@keyframes spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

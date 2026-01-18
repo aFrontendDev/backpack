@@ -1,0 +1,30 @@
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group label.required::after {
+  content: ' *';
+  color: #f44336;
+}
+
+.form-group .hint {
+  display: block;
+  margin-top: 0.25rem;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.form-group .error-message {
+  display: block;
+  margin-top: 0.25rem;
+  color: #f44336;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
