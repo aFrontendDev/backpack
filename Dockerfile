@@ -1,7 +1,9 @@
 FROM node:24-alpine
 
+# Install build dependencies for native modules and Litestream
+RUN apk add --no-cache ca-certificates wget python3 make g++
+
 # Install Litestream
-RUN apk add --no-cache ca-certificates wget
 RUN wget -O /tmp/litestream.tar.gz https://github.com/benbjohnson/litestream/releases/download/v0.3.13/litestream-v0.3.13-linux-amd64.tar.gz \
     && tar -xzf /tmp/litestream.tar.gz -C /usr/local/bin \
     && rm /tmp/litestream.tar.gz
@@ -10,7 +12,7 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy source and build
 COPY . .
