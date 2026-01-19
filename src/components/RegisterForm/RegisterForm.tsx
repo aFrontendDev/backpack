@@ -71,12 +71,12 @@ export default function RegisterForm({}: RegisterFormProps) {
           id="password"
           placeholder="Enter password"
           required
-          minLength={6}
+          minLength={12}
           maxLength={255}
           value={formState.password}
           onChange={(e) => setFormState({ ...formState, password: e.target.value })}
         />
-        <small className="hint">At least 6 characters</small>
+        <small className="hint">At least 12 characters</small>
       </div>
 
       <button type="submit" className="button primary full-width" disabled={isSubmitting}>

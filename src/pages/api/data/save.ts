@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../lib/db';
 
+// Max payload size: 1MB
+const MAX_PAYLOAD_SIZE = 1024 * 1024;
+
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const user = locals.user;
@@ -11,6 +14,17 @@ export const POST: APIRoute = async ({ request, locals }) => {
           error: 'Unauthorized. Please log in.'
         }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Check content length before parsing
+    const contentLength = request.headers.get('content-length');
+    if (contentLength && parseInt(contentLength, 10) > MAX_PAYLOAD_SIZE) {
+      return new Response(
+        JSON.stringify({
+          error: 'Payload too large. Maximum size is 1MB.'
+        }),
+        { status: 413, headers: { 'Content-Type': 'application/json' } }
       );
     }
 

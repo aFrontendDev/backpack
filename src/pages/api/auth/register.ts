@@ -25,10 +25,10 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       );
     }
 
-    if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
+    if (typeof password !== 'string' || password.length < 12 || password.length > 255) {
       return new Response(
         JSON.stringify({
-          error: 'Invalid password. Must be between 6 and 255 characters.'
+          error: 'Invalid password. Must be between 12 and 255 characters.'
         }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );

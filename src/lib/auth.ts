@@ -10,7 +10,9 @@ const adapter = new BetterSqlite3Adapter(db, {
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
     attributes: {
-      secure: import.meta.env.PROD
+      secure: import.meta.env.PROD, // Only send cookie over HTTPS (in production)
+      httpOnly: true,               // JavaScript cannot access cookie (prevents XSS theft)
+      sameSite: 'lax'               // Cookie not sent on cross-site requests (prevents CSRF)
     }
   },
   getUserAttributes: (attributes) => {
