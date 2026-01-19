@@ -1,7 +1,24 @@
+# Build stage
+FROM node:24-alpine AS builder
+
+# Install build dependencies for native modules
+RUN apk add --no-cache python3 make g++
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
+
+# Copy source and build
+COPY . .
+RUN npm run build
+
+# Production stage
 FROM node:24-alpine
 
-# Install build dependencies for native modules and Litestream
-RUN apk add --no-cache ca-certificates wget python3 make g++
+# Install only runtime dependencies
+RUN apk add --no-cache ca-certificates wget
 
 # Install Litestream (detect architecture)
 RUN ARCH=$(uname -m) && \
@@ -14,28 +31,29 @@ RUN ARCH=$(uname -m) && \
     && tar -xzf /tmp/litestream.tar.gz -C /usr/local/bin \
     && rm /tmp/litestream.tar.gz
 
+# Create non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
 # Set host to bind to all interfaces (needed for Docker)
 ENV HOST=0.0.0.0
 
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
+# Copy built app from builder stage
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Copy source and build
-COPY . .
-RUN npm run build
-
-# Create data directory for SQLite
-RUN mkdir -p /data
-
-# Copy Litestream config
+# Copy Litestream config and startup script
 COPY litestream.yml /etc/litestream.yml
-
-# Copy and setup startup script
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
+
+# Create data directory and set ownership
+RUN mkdir -p /data && chown -R appuser:appgroup /data /app
+
+# Switch to non-root user
+USER appuser
 
 EXPOSE 4321
 
