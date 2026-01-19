@@ -6,10 +6,10 @@ import { verify } from '@node-rs/bcrypt';
 export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     const formData = await request.formData();
-    const username = formData.get('username');
-    const password = formData.get('password');
+    const usernameRaw = formData.get('username');
+    const passwordRaw = formData.get('password');
 
-    if (typeof username !== 'string' || typeof password !== 'string') {
+    if (typeof usernameRaw !== 'string' || typeof passwordRaw !== 'string') {
       return new Response(
         JSON.stringify({
           error: 'Invalid credentials'
@@ -17,6 +17,9 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    const username = usernameRaw.trim();
+    const password = passwordRaw.trim();
 
     // Find user
     const user = db

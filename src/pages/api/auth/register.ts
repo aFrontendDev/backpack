@@ -7,12 +7,15 @@ import { hash } from '@node-rs/bcrypt';
 export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     const formData = await request.formData();
-    const username = formData.get('username');
-    const password = formData.get('password');
+    const usernameRaw = formData.get('username');
+    const passwordRaw = formData.get('password');
+
+    // Trim whitespace
+    const username = typeof usernameRaw === 'string' ? usernameRaw.trim() : '';
+    const password = typeof passwordRaw === 'string' ? passwordRaw.trim() : '';
 
     // Validate input
     if (
-      typeof username !== 'string' ||
       username.length < 3 ||
       username.length > 31 ||
       !/^[a-zA-Z0-9_-]+$/.test(username)
@@ -25,7 +28,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       );
     }
 
-    if (typeof password !== 'string' || password.length < 12 || password.length > 255) {
+    if (password.length < 12 || password.length > 255) {
       return new Response(
         JSON.stringify({
           error: 'Invalid password. Must be between 12 and 255 characters.'

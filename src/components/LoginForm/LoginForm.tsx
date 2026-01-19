@@ -15,8 +15,8 @@ export default function LoginForm({}: LoginFormProps) {
     setMessage({ text: '', type: '' });
 
     const formData = new FormData();
-    formData.append('username', formState.username);
-    formData.append('password', formState.password);
+    formData.append('username', formState.username.trim());
+    formData.append('password', formState.password.trim());
 
     try {
       const response = await fetch('/api/auth/login', {
