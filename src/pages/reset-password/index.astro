@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Card } from '../../components/Card';
+import ResetPasswordForm from '../../components/ResetPasswordForm/ResetPasswordForm';
+import './_reset-password.scss';
+
+const token = Astro.url.searchParams.get('token') || '';
+---
+
+<Layout title="Reset Password">
+  <main class="auth-page">
+    <Card className="auth-card">
+      <h1 class="text-center">Reset Password</h1>
+
+      <ResetPasswordForm client:load token={token} />
+
+      <p class="text-center">
+        Remember your password? <a href="/login">Login here</a>
+      </p>
+    </Card>
+  </main>
+</Layout>

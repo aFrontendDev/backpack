@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { runMigrations } from './migrations/index';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -9,32 +10,7 @@ const dbPath = process.env.DATABASE_PATH || path.resolve(__dirname, '../../data/
 
 export const db = new Database(dbPath);
 
-// Initialize database tables
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id TEXT PRIMARY KEY,
-    username TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    created_at INTEGER NOT NULL
-  );
-
-  CREATE TABLE IF NOT EXISTS sessions (
-    id TEXT PRIMARY KEY,
-    user_id TEXT NOT NULL,
-    expires_at INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-  );
-
-  CREATE TABLE IF NOT EXISTS user_data (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id TEXT NOT NULL,
-    key TEXT NOT NULL,
-    value TEXT NOT NULL,
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    UNIQUE(user_id, key)
-  );
-`);
+// Run migrations to initialize/update database schema
+runMigrations(db);
 
 export default db;

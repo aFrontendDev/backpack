@@ -1,4 +1,6 @@
-export interface RegisterFormProps {}
+export interface ResetPasswordFormProps {
+  token: string;
+}
 
 export interface MessageState {
   text: string;
@@ -6,7 +8,6 @@ export interface MessageState {
 }
 
 export interface FormState {
-  username: string;
-  email: string;
   password: string;
+  confirmPassword: string;
 }

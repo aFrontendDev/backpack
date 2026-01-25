@@ -4,7 +4,7 @@ import Spinner from '../Spinner/Spinner';
 import './RegisterForm.scss';
 
 export default function RegisterForm({}: RegisterFormProps) {
-  const [formState, setFormState] = useState<FormState>({ username: '', password: '' });
+  const [formState, setFormState] = useState<FormState>({ username: '', email: '', password: '' });
   const [message, setMessage] = useState<MessageState>({ text: '', type: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -16,6 +16,7 @@ export default function RegisterForm({}: RegisterFormProps) {
 
     const formData = new FormData();
     formData.append('username', formState.username.trim());
+    formData.append('email', formState.email.trim().toLowerCase());
     formData.append('password', formState.password.trim());
 
     try {
@@ -59,6 +60,21 @@ export default function RegisterForm({}: RegisterFormProps) {
           onChange={(e) => setFormState({ ...formState, username: e.target.value })}
         />
         <small className="hint">3-31 characters, letters, numbers, hyphens, and underscores only</small>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email">
+          Email <span className="required">*</span>
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter email"
+          required
+          value={formState.email}
+          onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+        />
       </div>
 
       <div className="form-group">

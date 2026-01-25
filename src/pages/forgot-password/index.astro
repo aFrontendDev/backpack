@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Card } from '../../components/Card';
+import ForgotPasswordForm from '../../components/ForgotPasswordForm/ForgotPasswordForm';
+import './_forgot-password.scss';
+---
+
+<Layout title="Forgot Password">
+  <main class="auth-page">
+    <Card className="auth-card">
+      <h1 class="text-center">Forgot Password</h1>
+      <p class="text-center subtitle">Enter your email to receive a password reset link.</p>
+
+      <ForgotPasswordForm client:load />
+
+      <p class="text-center">
+        Remember your password? <a href="/login">Login here</a>
+      </p>
+    </Card>
+  </main>
+</Layout>

@@ -8,10 +8,12 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     const formData = await request.formData();
     const usernameRaw = formData.get('username');
+    const emailRaw = formData.get('email');
     const passwordRaw = formData.get('password');
 
     // Trim whitespace
     const username = typeof usernameRaw === 'string' ? usernameRaw.trim() : '';
+    const email = typeof emailRaw === 'string' ? emailRaw.trim().toLowerCase() : '';
     const password = typeof passwordRaw === 'string' ? passwordRaw.trim() : '';
 
     // Validate input
@@ -23,6 +25,16 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       return new Response(
         JSON.stringify({
           error: 'Invalid username. Must be 3-31 characters and contain only letters, numbers, hyphens, and underscores.'
+        }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Basic email validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return new Response(
+        JSON.stringify({
+          error: 'Invalid email address.'
         }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
@@ -44,8 +56,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     try {
       // Insert user into database
       db.prepare(
-        'INSERT INTO users (id, username, password_hash, created_at) VALUES (?, ?, ?, ?)'
-      ).run(userId, username, passwordHash, Date.now());
+        'INSERT INTO users (id, username, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?)'
+      ).run(userId, username, email, passwordHash, Date.now());
 
       // Create session
       const session = await lucia.createSession(userId, {});
@@ -62,9 +74,12 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       );
     } catch (e: any) {
       if (e.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+        const message = e.message?.includes('email')
+          ? 'Email already registered'
+          : 'Username already exists';
         return new Response(
           JSON.stringify({
-            error: 'Username already exists'
+            error: message
           }),
           { status: 400, headers: { 'Content-Type': 'application/json' } }
         );
