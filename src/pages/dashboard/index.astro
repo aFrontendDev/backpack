@@ -17,7 +17,7 @@ if (!user) {
     </div>
 
     <div class="user-info">
-      <p>Welcome, <strong>{user.username}</strong>!</p>
+      <p>Welcome, <strong>{(user as any).username}</strong>!</p>
     </div>
 
     <div class="dashboard-actions">

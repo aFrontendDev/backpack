@@ -276,7 +276,7 @@ export default function GearListBuilder({ listId }: { listId: string }) {
               />
               <Select 
                 value={categoryFilter} 
-                onChange={(e) => setCategoryFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategoryFilter(e.target.value)}
                 className="category-select"
               >
                 <option value="">All Categories</option>

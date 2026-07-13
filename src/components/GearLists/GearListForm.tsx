@@ -81,7 +81,7 @@ export default function GearListForm({ list, onClose, onSave }: GearListFormProp
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Optional notes about this trip or list"
               rows={3}
             />
