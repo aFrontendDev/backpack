@@ -9,19 +9,17 @@ interface Props extends ButtonProps {
 export default function Button({
   type = 'button',
   variant = 'primary',
-  disabled = false,
   className = '',
-  id,
   children,
-}: Props) {
+  ...props
+}: ButtonProps) {
   const classes = `button ${variant} ${className}`.trim();
 
   return (
     <button
       type={type}
       className={classes}
-      disabled={disabled}
-      id={id}
+      {...props}
     >
       {children}
     </button>

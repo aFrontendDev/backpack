@@ -1,7 +1,5 @@
-export interface ButtonProps {
-  type?: 'button' | 'submit' | 'reset';
+import type { ButtonHTMLAttributes } from 'react';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger';
-  disabled?: boolean;
-  className?: string;
-  id?: string;
 }

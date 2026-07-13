@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { GearList } from '../GearLists/GearListContainer';
 import Spinner from '../Spinner/Spinner';
+import { Input } from '../Input';
+import { Select } from '../Select';
+import { Button } from '../Button';
 import './_GearListBuilder.scss';
 
 // Inventory Item interface
@@ -239,16 +242,16 @@ export default function GearListBuilder({ listId }: { listId: string }) {
                       <td>{formatWeight(item.weight_g)}</td>
                       <td>
                         <div className="quantity-controls">
-                          <button onClick={() => updateQuantity(item.list_item_id, -1, item.quantity)}>-</button>
+                          <Button className="btn-icon" onClick={() => updateQuantity(item.list_item_id, -1, item.quantity)}>-</Button>
                           <span>{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.list_item_id, 1, item.quantity)}>+</button>
+                          <Button className="btn-icon" onClick={() => updateQuantity(item.list_item_id, 1, item.quantity)}>+</Button>
                         </div>
                       </td>
                       <td className="total-weight">{formatWeight(item.weight_g * item.quantity)}</td>
                       <td>
-                        <button className="btn-remove" onClick={() => removeListItem(item.list_item_id)} title="Remove Item">
+                        <Button className="btn-remove btn-icon danger" onClick={() => removeListItem(item.list_item_id)} title="Remove Item">
                           ✕
-                        </button>
+                        </Button>
                       </td>
                     </tr>
                   ))}
@@ -264,14 +267,14 @@ export default function GearListBuilder({ listId }: { listId: string }) {
             <h3>Add from Inventory</h3>
             
             <div className="filters">
-              <input 
+              <Input 
                 type="text" 
                 placeholder="Search items..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
               />
-              <select 
+              <Select 
                 value={categoryFilter} 
                 onChange={(e) => setCategoryFilter(e.target.value)}
                 className="category-select"
@@ -280,7 +283,7 @@ export default function GearListBuilder({ listId }: { listId: string }) {
                 {categories.map(c => (
                   <option key={c} value={c}>{c}</option>
                 ))}
-              </select>
+              </Select>
             </div>
 
             <div className="available-items">
@@ -293,9 +296,9 @@ export default function GearListBuilder({ listId }: { listId: string }) {
                       <span className="name">{item.name} {item.brand ? `(${item.brand})` : ''}</span>
                       <span className="weight">{formatWeight(item.weight_g)}</span>
                     </div>
-                    <button className="btn-add" onClick={() => addItemToList(item.id)}>
+                    <Button className="btn-add" variant="primary" onClick={() => addItemToList(item.id)}>
                       + Add
-                    </button>
+                    </Button>
                   </div>
                 ))
               )}

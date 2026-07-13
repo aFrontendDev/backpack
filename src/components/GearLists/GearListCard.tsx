@@ -1,4 +1,5 @@
 import type { GearList } from './GearListContainer';
+import { Button } from '../Button';
 import './_GearListCard.scss';
 
 interface GearListCardProps {
@@ -31,12 +32,12 @@ export default function GearListCard({ list, onEdit, onDelete }: GearListCardPro
           <h4>{list.name}</h4>
         </div>
         <div className="actions">
-          <button className="btn-icon" onClick={() => onEdit(list)} title="Edit List Details">
+          <Button className="btn-icon" onClick={() => onEdit(list)} title="Edit List Details">
             ✏️
-          </button>
-          <button className="btn-icon danger" onClick={() => onDelete(list.id)} title="Delete List">
+          </Button>
+          <Button className="btn-icon danger" onClick={() => onDelete(list.id)} title="Delete List">
             🗑️
-          </button>
+          </Button>
         </div>
       </div>
       

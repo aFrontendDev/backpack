@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import type { ForgotPasswordFormProps, MessageState, FormState } from './ForgotPasswordForm.types';
 import Spinner from '../Spinner/Spinner';
+import { FormGroup } from '../FormGroup';
+import { Input } from '../Input';
+import { Button } from '../Button';
 import './ForgotPasswordForm.scss';
 
 export default function ForgotPasswordForm({}: ForgotPasswordFormProps) {
@@ -44,18 +47,15 @@ export default function ForgotPasswordForm({}: ForgotPasswordFormProps) {
       <div className="forgot-password-success">
         <p>Check your email for a password reset link.</p>
         <p className="hint">If you don't see it, check your spam folder.</p>
-        <a href="/login" className="button secondary full-width">Back to Login</a>
+        <Button onClick={() => window.location.href = '/login'} variant="secondary" className="full-width">Back to Login</Button>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="email">
-          Email <span className="required">*</span>
-        </label>
-        <input
+      <FormGroup label="Email" htmlFor="email" required>
+        <Input
           type="email"
           name="email"
           id="email"
@@ -64,9 +64,9 @@ export default function ForgotPasswordForm({}: ForgotPasswordFormProps) {
           value={formState.email}
           onChange={(e) => setFormState({ ...formState, email: e.target.value })}
         />
-      </div>
+      </FormGroup>
 
-      <button type="submit" className="button primary full-width" disabled={isSubmitting}>
+      <Button type="submit" variant="primary" className="full-width" disabled={isSubmitting}>
         {isSubmitting ? (
           <>
             <Spinner size="small" /> Sending...
@@ -74,7 +74,7 @@ export default function ForgotPasswordForm({}: ForgotPasswordFormProps) {
         ) : (
           'Send Reset Link'
         )}
-      </button>
+      </Button>
 
       {message.text && (
         <div className={`message ${message.type} visible`}>

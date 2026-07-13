@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import type { InventoryItem } from '../InventoryList/InventoryList';
+import { FormGroup } from '../FormGroup';
+import { Input } from '../Input';
+import { Select } from '../Select';
+import { Textarea } from '../Textarea';
+import { Button } from '../Button';
 import './_InventoryItemForm.scss';
 
 interface Props {
@@ -87,9 +92,8 @@ export default function InventoryItemForm({ item, onSave, onCancel }: Props) {
       {error && <div className="form-error">{error}</div>}
       
       <form onSubmit={handleSubmit} className="inventory-form">
-        <div className="form-group">
-          <label htmlFor="name">Item Name *</label>
-          <input 
+        <FormGroup label="Item Name *" htmlFor="name">
+          <Input 
             type="text" 
             id="name" 
             name="name" 
@@ -98,12 +102,11 @@ export default function InventoryItemForm({ item, onSave, onCancel }: Props) {
             required 
             placeholder="e.g. Copper Spur HV UL2"
           />
-        </div>
+        </FormGroup>
 
         <div className="form-row">
-          <div className="form-group half">
-            <label htmlFor="brand">Brand</label>
-            <input 
+          <FormGroup label="Brand" htmlFor="brand" className="half">
+            <Input 
               type="text" 
               id="brand" 
               name="brand" 
@@ -111,36 +114,34 @@ export default function InventoryItemForm({ item, onSave, onCancel }: Props) {
               onChange={handleChange} 
               placeholder="e.g. Big Agnes"
             />
-          </div>
+          </FormGroup>
 
-          <div className="form-group half">
-            <label htmlFor="weight_g">Weight (g) *</label>
-            <input 
+          <FormGroup label="Weight (g) *" htmlFor="weight_g" className="half">
+            <Input 
               type="number" 
               id="weight_g" 
               name="weight_g" 
               value={formData.weight_g} 
               onChange={handleChange} 
               required 
-              min="0"
+              min={0}
               step="any"
               placeholder="e.g. 1420"
             />
-          </div>
+          </FormGroup>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <select id="category" name="category" value={formData.category} onChange={handleChange}>
+        <FormGroup label="Category" htmlFor="category">
+          <Select id="category" name="category" value={formData.category} onChange={handleChange}>
             <option value="">Select a category</option>
             {CATEGORIES.map(cat => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
-          </select>
-        </div>
+          </Select>
+        </FormGroup>
 
         <div className="form-group checkbox-group">
-          <input 
+          <Input 
             type="checkbox" 
             id="is_owned" 
             name="is_owned" 
@@ -150,9 +151,8 @@ export default function InventoryItemForm({ item, onSave, onCancel }: Props) {
           <label htmlFor="is_owned">I own this item</label>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="url">Product URL</label>
-          <input 
+        <FormGroup label="Product URL" htmlFor="url">
+          <Input 
             type="url" 
             id="url" 
             name="url" 
@@ -160,11 +160,10 @@ export default function InventoryItemForm({ item, onSave, onCancel }: Props) {
             onChange={handleChange} 
             placeholder="https://..."
           />
-        </div>
+        </FormGroup>
 
-        <div className="form-group">
-          <label htmlFor="notes">Notes</label>
-          <textarea 
+        <FormGroup label="Notes" htmlFor="notes">
+          <Textarea 
             id="notes" 
             name="notes" 
             value={formData.notes} 
@@ -172,15 +171,15 @@ export default function InventoryItemForm({ item, onSave, onCancel }: Props) {
             rows={3}
             placeholder="Any specific details..."
           />
-        </div>
+        </FormGroup>
 
         <div className="form-actions">
-          <button type="button" className="btn-cancel" onClick={onCancel} disabled={loading}>
+          <Button type="button" className="btn-cancel" onClick={onCancel} disabled={loading}>
             Cancel
-          </button>
-          <button type="submit" className="btn-save" disabled={loading}>
+          </Button>
+          <Button type="submit" variant="primary" className="btn-save" disabled={loading}>
             {loading ? 'Saving...' : 'Save Item'}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

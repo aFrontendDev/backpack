@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import type { LoginFormProps, MessageState, FormState } from './LoginForm.types';
 import Spinner from '../Spinner/Spinner';
+import { FormGroup } from '../FormGroup';
+import { Input } from '../Input';
+import { Button } from '../Button';
 import './LoginForm.scss';
 
 export default function LoginForm({}: LoginFormProps) {
@@ -42,11 +45,8 @@ export default function LoginForm({}: LoginFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="username">
-          Username <span className="required">*</span>
-        </label>
-        <input
+      <FormGroup label="Username" htmlFor="username" required>
+        <Input
           type="text"
           name="username"
           id="username"
@@ -55,13 +55,10 @@ export default function LoginForm({}: LoginFormProps) {
           value={formState.username}
           onChange={(e) => setFormState({ ...formState, username: e.target.value })}
         />
-      </div>
+      </FormGroup>
 
-      <div className="form-group">
-        <label htmlFor="password">
-          Password <span className="required">*</span>
-        </label>
-        <input
+      <FormGroup label="Password" htmlFor="password" required>
+        <Input
           type="password"
           name="password"
           id="password"
@@ -70,9 +67,9 @@ export default function LoginForm({}: LoginFormProps) {
           value={formState.password}
           onChange={(e) => setFormState({ ...formState, password: e.target.value })}
         />
-      </div>
+      </FormGroup>
 
-      <button type="submit" className="button primary full-width" disabled={isSubmitting}>
+      <Button type="submit" variant="primary" className="full-width" disabled={isSubmitting}>
         {isSubmitting ? (
           <>
             <Spinner size="small" /> Logging in...
@@ -80,7 +77,7 @@ export default function LoginForm({}: LoginFormProps) {
         ) : (
           'Login'
         )}
-      </button>
+      </Button>
 
       {message.text && (
         <div className={`message ${message.type} visible`}>

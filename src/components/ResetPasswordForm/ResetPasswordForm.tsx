@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import type { ResetPasswordFormProps, MessageState, FormState } from './ResetPasswordForm.types';
 import Spinner from '../Spinner/Spinner';
+import { FormGroup } from '../FormGroup';
+import { Input } from '../Input';
+import { Button } from '../Button';
 import './ResetPasswordForm.scss';
 
 export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
@@ -49,18 +52,15 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     return (
       <div className="reset-password-error">
         <p>Invalid or missing reset token.</p>
-        <a href="/forgot-password" className="button secondary full-width">Request New Link</a>
+        <Button onClick={() => window.location.href = '/forgot-password'} variant="secondary" className="full-width">Request New Link</Button>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="password">
-          New Password <span className="required">*</span>
-        </label>
-        <input
+      <FormGroup label="New Password" htmlFor="password" required hint="At least 12 characters">
+        <Input
           type="password"
           name="password"
           id="password"
@@ -71,14 +71,10 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           value={formState.password}
           onChange={(e) => setFormState({ ...formState, password: e.target.value })}
         />
-        <small className="hint">At least 12 characters</small>
-      </div>
+      </FormGroup>
 
-      <div className="form-group">
-        <label htmlFor="confirmPassword">
-          Confirm Password <span className="required">*</span>
-        </label>
-        <input
+      <FormGroup label="Confirm Password" htmlFor="confirmPassword" required>
+        <Input
           type="password"
           name="confirmPassword"
           id="confirmPassword"
@@ -89,9 +85,9 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           value={formState.confirmPassword}
           onChange={(e) => setFormState({ ...formState, confirmPassword: e.target.value })}
         />
-      </div>
+      </FormGroup>
 
-      <button type="submit" className="button primary full-width" disabled={isSubmitting}>
+      <Button type="submit" variant="primary" className="full-width" disabled={isSubmitting}>
         {isSubmitting ? (
           <>
             <Spinner size="small" /> Resetting...
@@ -99,7 +95,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         ) : (
           'Reset Password'
         )}
-      </button>
+      </Button>
 
       {message.text && (
         <div className={`message ${message.type} visible`}>

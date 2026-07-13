@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import type { GearList } from './GearListContainer';
 import Spinner from '../Spinner/Spinner';
+import { FormGroup } from '../FormGroup';
+import { Input } from '../Input';
+import { Textarea } from '../Textarea';
+import { Button } from '../Button';
 import './_GearListForm.scss';
 
 interface GearListFormProps {
@@ -62,9 +66,8 @@ export default function GearListForm({ list, onClose, onSave }: GearListFormProp
         {error && <div className="form-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="gear-list-form">
-          <div className="form-group">
-            <label htmlFor="name">List Name *</label>
-            <input
+          <FormGroup label="List Name *" htmlFor="name">
+            <Input
               type="text"
               id="name"
               required
@@ -72,25 +75,23 @@ export default function GearListForm({ list, onClose, onSave }: GearListFormProp
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Summer West Highland Way"
             />
-          </div>
+          </FormGroup>
 
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
+          <FormGroup label="Description" htmlFor="description">
+            <Textarea
               id="description"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Optional notes about this trip or list"
               rows={3}
             />
-          </div>
+          </FormGroup>
 
-          <div className="form-group">
-            <label htmlFor="target_weight_g">Target Weight Goal (grams)</label>
-            <input
+          <FormGroup label="Target Weight Goal (grams)" htmlFor="target_weight_g">
+            <Input
               type="number"
               id="target_weight_g"
-              min="0"
+              min={0}
               step="any"
               value={formData.target_weight_g}
               onChange={(e) => setFormData({ ...formData, target_weight_g: e.target.value })}
@@ -101,15 +102,15 @@ export default function GearListForm({ list, onClose, onSave }: GearListFormProp
                 ≈ {formatOz(parseFloat(formData.target_weight_g.toString()) * 0.035274)}
               </small>
             )}
-          </div>
+          </FormGroup>
 
           <div className="form-actions">
-            <button type="button" className="btn-cancel" onClick={onClose} disabled={isSubmitting}>
+            <Button type="button" className="btn-cancel" onClick={onClose} disabled={isSubmitting}>
               Cancel
-            </button>
-            <button type="submit" className="btn-save" disabled={isSubmitting}>
+            </Button>
+            <Button type="submit" variant="primary" className="btn-save" disabled={isSubmitting}>
               {isSubmitting ? <Spinner size="small" /> : 'Save List'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

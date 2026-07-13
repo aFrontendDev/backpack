@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import InventoryCard from '../InventoryCard/InventoryCard';
 import InventoryItemForm from '../InventoryItemForm/InventoryItemForm';
 import Spinner from '../Spinner/Spinner';
+import { Button } from '../Button';
 import './_InventoryList.scss';
 
 export interface InventoryItem {
@@ -86,7 +87,7 @@ export default function InventoryList() {
     <div className="inventory-container">
       <div className="inventory-header">
         <h2>My Gear</h2>
-        <button className="add-btn" onClick={() => setShowForm(true)}>+ Add Item</button>
+        <Button className="add-btn" variant="primary" onClick={() => setShowForm(true)}>+ Add Item</Button>
       </div>
 
       {error && <div className="error-message">{error}</div>}

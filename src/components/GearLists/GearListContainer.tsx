@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import GearListCard from './GearListCard';
 import GearListForm from './GearListForm';
 import Spinner from '../Spinner/Spinner';
+import { Button } from '../Button';
 import './_GearListContainer.scss';
 
 export interface GearList {
@@ -62,15 +63,15 @@ export default function GearListContainer() {
     <div className="gear-list-container">
       <div className="toolbar">
         <h2>Your Gear Lists</h2>
-        <button 
-          className="button primary" 
+        <Button 
+          variant="primary" 
           onClick={() => {
             setEditingList(null);
             setIsFormOpen(true);
           }}
         >
           + Create New List
-        </button>
+        </Button>
       </div>
 
       {error && <div className="error-message">{error}</div>}
@@ -78,12 +79,12 @@ export default function GearListContainer() {
       {lists.length === 0 && !error ? (
         <div className="empty-state">
           <p>You haven't created any gear lists yet.</p>
-          <button 
-            className="button primary" 
+          <Button 
+            variant="primary" 
             onClick={() => setIsFormOpen(true)}
           >
             Create Your First List
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="grid">
