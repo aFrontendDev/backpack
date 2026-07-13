@@ -1,0 +1,142 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.inventory-form-container {
+  padding: rem($spacing-lg);
+
+  h3 {
+    margin-bottom: rem($spacing-md);
+    border-bottom: 1px solid $border-color;
+    padding-bottom: rem($spacing-sm);
+  }
+}
+
+.form-error {
+  color: $danger-color;
+  background: rgba($danger-color, 0.1);
+  padding: rem($spacing-sm);
+  border-radius: 4px;
+  margin-bottom: rem($spacing-md);
+  font-size: rem(14);
+}
+
+.inventory-form {
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-md);
+}
+
+.form-row {
+  display: flex;
+  gap: rem($spacing-md);
+  
+  .half {
+    flex: 1;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-xs);
+
+  label {
+    font-size: rem(14);
+    font-weight: 500;
+    color: $text-color;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="url"],
+  select,
+  textarea {
+    width: 100%;
+    padding: rem($spacing-sm);
+    background: $bg-body;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    color: $text-color;
+    font-family: inherit;
+    font-size: rem(15);
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+  
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right rem($spacing-sm) top 50%;
+    background-size: 0.65rem auto;
+    
+    option {
+      background: $bg-white;
+      color: $text-color;
+    }
+  }
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: $primary-color;
+    cursor: pointer;
+  }
+  
+  label {
+    cursor: pointer;
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: rem($spacing-sm);
+  margin-top: rem($spacing-sm);
+
+  button {
+    padding: rem($spacing-sm) rem($spacing-md);
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: rem(15);
+    transition: background 0.2s;
+  }
+
+  .btn-cancel {
+    background: transparent;
+    color: $text-color-light;
+    border: 1px solid $border-color;
+    
+    &:hover:not(:disabled) {
+      background: $bg-muted;
+      color: $text-color;
+    }
+  }
+
+  .btn-save {
+    background: $primary-color;
+    color: white;
+    border: none;
+    
+    &:hover:not(:disabled) {
+      background: color.adjust($primary-color, $lightness: -5%);
+    }
+  }
+  
+  button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}

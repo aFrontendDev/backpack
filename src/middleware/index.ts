@@ -1,5 +1,6 @@
 import { lucia } from '../lib/auth';
 import { defineMiddleware } from 'astro:middleware';
+import { db } from '../lib/db';
 import { checkRateLimit, authRateLimit } from '../lib/rateLimit';
 
 // Security headers to add to all responses
@@ -71,6 +72,24 @@ export const onRequest = defineMiddleware(async (context, next) => {
           }
         );
       }
+    }
+  }
+
+  // Development mode bypass
+  if (import.meta.env.DEV && import.meta.env.BYPASS_AUTH === 'true') {
+    const devUser = db.prepare('SELECT id, username FROM users LIMIT 1').get() as { id: string; username: string } | undefined;
+    if (devUser) {
+      context.locals.user = { id: devUser.id, username: devUser.username };
+      context.locals.session = { 
+        id: 'dev-session', 
+        userId: devUser.id, 
+        fresh: false, 
+        expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) 
+      } as any;
+      
+      const response = await next();
+      addSecurityHeaders(response);
+      return response;
     }
   }
 

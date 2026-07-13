@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GearListBuilder from '../../components/GearListBuilder/GearListBuilder';
+import './_[id].scss';
+
+const user = Astro.locals.user;
+
+if (!user) {
+  return Astro.redirect('/login');
+}
+
+const { id } = Astro.params;
+
+if (!id) {
+  return Astro.redirect('/gear-lists');
+}
+---
+
+<Layout title="Pack Builder | Backpack App">
+  <main class="container page-gear-list-builder">
+    <div class="nav-bar">
+      <a href="/gear-lists" class="back-link">← Back to Gear Lists</a>
+    </div>
+
+    <GearListBuilder client:load listId={id} />
+  </main>
+</Layout>

@@ -1,0 +1,187 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.inventory-card {
+  background: rgba($bg-white, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: rem($spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-sm);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: $primary-color;
+  }
+
+  &.wishlist {
+    background: rgba($bg-white, 0.4);
+    border-style: dashed;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: $secondary-color;
+    }
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: rem($spacing-sm);
+
+  .title-group {
+    flex: 1;
+
+    h4 {
+      margin: 0;
+      font-size: rem(18);
+      color: $text-color;
+    }
+
+    .brand {
+      font-size: rem(13);
+      color: $text-color-light;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: rem($spacing-xs);
+
+    .btn-icon {
+      background: transparent;
+      border: none;
+      color: $text-color-light;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, background 0.2s;
+
+      &:hover {
+        background: $bg-muted;
+        color: $text-color;
+      }
+
+      &.danger:hover {
+        background: rgba($danger-color, 0.2);
+        color: $danger-color;
+      }
+    }
+  }
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-sm);
+
+  .metrics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $bg-body;
+    padding: rem($spacing-sm);
+    border-radius: 8px;
+  }
+
+  .metric {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      font-size: rem(12);
+      color: $text-color-light;
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-size: rem(16);
+      font-weight: 600;
+      color: $primary-color;
+
+      small {
+        font-size: 0.8em;
+        color: $text-color-light;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .category-badge {
+    background: $bg-body;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: rem(12);
+    color: $text-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .notes {
+    font-size: rem(14);
+    color: $text-color-light;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .status-badge {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: rem(12);
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba($secondary-color, 0.2);
+    color: $secondary-color;
+  }
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: rem($spacing-sm);
+  border-top: 1px solid $border-color-light;
+
+  .date {
+    font-size: rem(12);
+    color: $text-color-light;
+  }
+
+  .external-link {
+    font-size: rem(13);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: $primary-color;
+    
+    &:hover {
+      text-decoration: none;
+      color: color.adjust($primary-color, $lightness: 10%);
+    }
+  }
+}

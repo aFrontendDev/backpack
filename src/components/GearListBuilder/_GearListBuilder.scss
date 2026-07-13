@@ -1,0 +1,324 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.gear-list-builder {
+  &.loading {
+    display: flex;
+    justify-content: center;
+    padding: rem($spacing-xl);
+  }
+
+  &.error {
+    color: $danger-color;
+    background: rgba($danger-color, 0.1);
+    padding: rem($spacing-md);
+    border-radius: 8px;
+  }
+
+  .header {
+    margin-bottom: rem($spacing-lg);
+
+    h2 {
+      margin: 0;
+      color: $text-color;
+    }
+
+    .description {
+      color: $text-color-light;
+      margin-top: rem($spacing-xs);
+    }
+  }
+
+  .builder-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: rem($spacing-lg);
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Cards
+.weight-summary-card,
+.list-items-card,
+.inventory-picker-card {
+  background: rgba($bg-white, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: rem($spacing-md);
+  margin-bottom: rem($spacing-lg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: rem($spacing-md);
+    color: $text-color;
+  }
+}
+
+// Weight Summary
+.weight-summary-card {
+  .weight-metrics {
+    display: flex;
+    gap: rem($spacing-lg);
+    margin-bottom: rem($spacing-md);
+  }
+
+  .metric {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      font-size: rem(12);
+      color: $text-color-light;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .value {
+      font-size: rem(24);
+      font-weight: 700;
+      color: $text-color;
+
+      small {
+        font-size: rem(14);
+        color: $text-color-light;
+        font-weight: normal;
+      }
+
+      &.danger {
+        color: $danger-color;
+      }
+    }
+
+    &.primary .value {
+      color: $primary-color;
+      font-size: rem(32);
+      
+      small {
+        font-size: rem(16);
+      }
+    }
+  }
+
+  .progress-bar-container {
+    height: 8px;
+    background: $bg-body;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .progress-bar {
+      height: 100%;
+      transition: width 0.3s ease;
+
+      &.success {
+        background: $primary-color;
+      }
+      &.danger {
+        background: $danger-color;
+      }
+    }
+  }
+}
+
+// List Items Table
+.list-items-card {
+  .empty-list {
+    text-align: center;
+    padding: rem($spacing-xl) 0;
+    color: $text-color-light;
+    border: 1px dashed $border-color;
+    border-radius: 8px;
+  }
+
+  .items-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+      text-align: left;
+      padding: rem($spacing-sm);
+      border-bottom: 2px solid $border-color;
+      color: $text-color-light;
+      font-size: rem(14);
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: rem($spacing-sm);
+      border-bottom: 1px solid $border-color-light;
+      vertical-align: middle;
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: $text-color;
+    }
+
+    .item-brand {
+      font-size: rem(12);
+      color: $text-color-light;
+      text-transform: uppercase;
+    }
+
+    .badge {
+      display: inline-block;
+      background: $bg-body;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: rem(11);
+      margin-top: 4px;
+      color: $text-color-light;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: rem($spacing-xs);
+      background: $bg-body;
+      padding: 2px;
+      border-radius: 4px;
+      width: fit-content;
+
+      button {
+        background: $bg-white;
+        border: 1px solid $border-color;
+        border-radius: 2px;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: rem(16);
+        color: $text-color;
+
+        &:hover {
+          background: $bg-muted;
+        }
+      }
+
+      span {
+        font-weight: 600;
+        min-width: 20px;
+        text-align: center;
+      }
+    }
+
+    .total-weight {
+      font-weight: 600;
+      color: $primary-color;
+    }
+
+    .btn-remove {
+      background: transparent;
+      border: none;
+      color: $text-color-light;
+      cursor: pointer;
+      font-size: rem(14);
+      padding: 4px 8px;
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba($danger-color, 0.1);
+        color: $danger-color;
+      }
+    }
+  }
+}
+
+// Inventory Picker
+.inventory-picker-card {
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: rem($spacing-sm);
+    margin-bottom: rem($spacing-md);
+
+    input, select {
+      padding: rem($spacing-sm);
+      border: 1px solid $border-color;
+      border-radius: 6px;
+      background: $bg-white;
+      color: $text-color;
+    }
+  }
+
+  .available-items {
+    display: flex;
+    flex-direction: column;
+    gap: rem($spacing-xs);
+    max-height: 600px;
+    overflow-y: auto;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $border-color;
+      border-radius: 3px;
+    }
+  }
+
+  .no-items {
+    text-align: center;
+    color: $text-color-light;
+    padding: rem($spacing-md);
+  }
+
+  .picker-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem($spacing-sm);
+    border: 1px solid $border-color-light;
+    border-radius: 6px;
+    background: $bg-white;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    .item-details {
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        font-weight: 500;
+        color: $text-color;
+        font-size: rem(14);
+      }
+
+      .weight {
+        font-size: rem(12);
+        color: $text-color-light;
+      }
+    }
+
+    .btn-add {
+      background: transparent;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: rem(12);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: $primary-color;
+        color: white;
+      }
+    }
+  }
+}

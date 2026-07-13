@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InventoryList from '../../components/InventoryList/InventoryList';
+import './_inventory.scss';
+
+const user = Astro.locals.user;
+
+if (!user) {
+  return Astro.redirect('/login');
+}
+---
+
+<Layout title="Gear Inventory | Backpack App">
+  <main class="container page-inventory">
+    <div class="header">
+      <h1>Gear Inventory</h1>
+      <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+    </div>
+
+    <p className="subtitle">Manage your gear items and track their weights.</p>
+
+    <InventoryList client:load />
+  </main>
+</Layout>

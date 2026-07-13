@@ -8,10 +8,14 @@ export interface Migration {
 // Import migrations in order
 import { migration as m001 } from './001_initial_schema';
 import { migration as m002 } from './002_add_email_and_reset_tokens';
+import { migration as m003 } from './003_add_inventory_items';
+import { migration as m004 } from './004_add_gear_lists';
 
 const migrations: Migration[] = [
   m001,
   m002,
+  m003,
+  m004,
 ];
 
 export function runMigrations(db: Database.Database): void {

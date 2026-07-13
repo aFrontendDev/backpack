@@ -1,0 +1,49 @@
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.gear-list-container {
+  &.loading {
+    display: flex;
+    justify-content: center;
+    padding: rem($spacing-xl);
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: rem($spacing-lg);
+
+    h2 {
+      margin: 0;
+      color: $text-color;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: rem($spacing-md);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: rem($spacing-xl);
+    background: $bg-white;
+    border-radius: 12px;
+    border: 1px dashed $border-color;
+    
+    p {
+      color: $text-color-light;
+      margin-bottom: rem($spacing-md);
+    }
+  }
+
+  .error-message {
+    color: $danger-color;
+    background: rgba($danger-color, 0.1);
+    padding: rem($spacing-sm);
+    border-radius: 6px;
+    margin-bottom: rem($spacing-md);
+  }
+}

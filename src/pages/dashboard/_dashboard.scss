@@ -184,3 +184,61 @@ button {
   color: $text-color-light;
   padding: rem($spacing-xl);
 }
+
+.dashboard-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: rem($spacing-md);
+  margin-bottom: rem($spacing-xl);
+}
+
+.dashboard-card-link {
+  background: $bg-white;
+  border: 1px solid $border-color;
+  border-radius: rem($radius-md);
+  padding: rem($spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-sm);
+  color: $text-color;
+  text-decoration: none;
+  box-shadow: 0 2px 4px $shadow-color;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: $primary-color;
+  }
+
+  .icon {
+    font-size: rem(32);
+    margin-bottom: rem($spacing-xs);
+  }
+
+  h3 {
+    margin: 0;
+    color: $primary-color;
+  }
+
+  p {
+    margin: 0;
+    color: $text-color-light;
+    font-size: rem($font-size-sm);
+  }
+}
+
+.section-divider {
+  margin: rem($spacing-xl) 0 rem($spacing-md);
+  padding-bottom: rem($spacing-sm);
+  border-bottom: 1px solid $border-color;
+
+  h3 {
+    margin: 0;
+    color: $text-color-light;
+    font-size: rem($font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}

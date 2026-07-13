@@ -1,12 +1,11 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Dashboard from '../../components/Dashboard/Dashboard';
-import './_dashboard.scss';
+import Layout from "../../layouts/Layout.astro";
+import "./_dashboard.scss";
 
 const user = Astro.locals.user;
 
 if (!user) {
-  return Astro.redirect('/login');
+  return Astro.redirect("/login");
 }
 ---
 
@@ -21,6 +20,20 @@ if (!user) {
       <p>Welcome, <strong>{user.username}</strong>!</p>
     </div>
 
-    <Dashboard client:load />
+    <div class="dashboard-actions">
+      <a href="/inventory" class="dashboard-card-link">
+        <div class="icon">🎒</div>
+        <h3>Gear Inventory</h3>
+        <p>Manage your gear items, weights, and wishlist.</p>
+      </a>
+
+      <a href="/gear-lists" class="dashboard-card-link">
+        <div class="icon">📋</div>
+        <h3>Gear Lists</h3>
+        <p>Plan trips, group items, and calculate pack weights.</p>
+      </a>
+    </div>
+
+    </div>
   </main>
 </Layout>

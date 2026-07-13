@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.page-inventory {
+  padding-top: rem($spacing-xl);
+  padding-bottom: rem($spacing-xl);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: rem($spacing-xs);
+
+    h1 {
+      margin-bottom: 0;
+    }
+  }
+
+  .back-link {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: rem(14);
+    
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  .subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: rem($spacing-xl);
+  }
+}

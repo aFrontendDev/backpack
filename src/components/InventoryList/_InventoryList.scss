@@ -1,0 +1,95 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.inventory-container {
+  margin-top: rem($spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-md);
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.add-btn {
+  background: $primary-color;
+  color: white;
+  border: none;
+  padding: rem($spacing-sm) rem($spacing-md);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+
+  &:hover {
+    background: color.adjust($primary-color, $lightness: -10%);
+    transform: translateY(-2px);
+  }
+}
+
+.error-message {
+  color: $danger-color;
+  background: rgba($danger-color, 0.1);
+  padding: rem($spacing-sm);
+  border-radius: 4px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: rem($spacing-xl);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: rgba($text-color, 0.7);
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: rem($spacing-md);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: $bg-white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

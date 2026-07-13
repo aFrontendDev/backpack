@@ -1,0 +1,106 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.gear-list-form-container {
+  padding: rem($spacing-lg);
+
+  h3 {
+    margin-bottom: rem($spacing-md);
+    border-bottom: 1px solid $border-color;
+    padding-bottom: rem($spacing-sm);
+  }
+}
+
+.form-error {
+  color: $danger-color;
+  background: rgba($danger-color, 0.1);
+  padding: rem($spacing-sm);
+  border-radius: 4px;
+  margin-bottom: rem($spacing-md);
+  font-size: rem(14);
+}
+
+.gear-list-form {
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: rem($spacing-xs);
+
+  label {
+    font-size: rem(14);
+    font-weight: 500;
+    color: $text-color;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: rem($spacing-sm);
+    background: $bg-body;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    color: $text-color;
+    font-family: inherit;
+    font-size: rem(15);
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+
+  .weight-hint {
+    font-size: rem(12);
+    color: $text-color-light;
+    margin-top: 4px;
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: rem($spacing-sm);
+  margin-top: rem($spacing-sm);
+
+  button {
+    padding: rem($spacing-sm) rem($spacing-md);
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: rem(15);
+    transition: background 0.2s;
+  }
+
+  .btn-cancel {
+    background: transparent;
+    color: $text-color-light;
+    border: 1px solid $border-color;
+    
+    &:hover:not(:disabled) {
+      background: $bg-muted;
+      color: $text-color;
+    }
+  }
+
+  .btn-save {
+    background: $primary-color;
+    color: white;
+    border: none;
+    
+    &:hover:not(:disabled) {
+      background: color.adjust($primary-color, $lightness: -5%);
+    }
+  }
+  
+  button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}

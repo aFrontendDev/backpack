@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+@use '../../styles/functions' as *;
+
+.page-gear-list-builder {
+  padding-top: rem($spacing-lg);
+  padding-bottom: rem($spacing-xl);
+  max-width: 1200px; /* Wider container for the builder */
+
+  .nav-bar {
+    margin-bottom: rem($spacing-md);
+  }
+
+  .back-link {
+    color: $text-color-light;
+    font-size: rem(14);
+    
+    &:hover {
+      color: $text-color;
+      text-decoration: none;
+    }
+  }
+}
